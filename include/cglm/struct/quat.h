@@ -45,6 +45,7 @@
    CGLM_INLINE mat4s   glms_quat_rotate(mat4s m, versors q)
    CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q, vec3s pivot)
    CGLM_INLINE mat4s   glms_quat_rotate_atm(versors q, vec3s pivot)
+   CGLM_INLINE vec3s   glms_quat_rotate_atv(versor q, vec3 v, vec3 pivot)
    CGLM_INLINE versors glms_quat_make(float * restrict src)
  */
 
@@ -581,6 +582,22 @@ mat4s
 glms_quat_(rotate_atm)(versors q, vec3s pivot) {
   mat4s dest;
   glm_quat_rotate_atm(dest.raw, q.raw, pivot.raw);
+  return dest;
+}
+
+/*!
+ * @brief rotate vector using quaternion at pivot point
+ *
+ * @param[in]   q     quaternion
+ * @param[in]   v     vector to rotate
+ * @param[in]   pivot pivot
+ * @returns rotated vector
+ */
+CGLM_INLINE
+vec3s
+glms_quat_(rotate_atv)(versor q, vec3 v, vec3 pivot) {
+  vec3s dest;
+  glm_quat_rotate_atv(q, v, pivot, dest.raw);
   return dest;
 }
 

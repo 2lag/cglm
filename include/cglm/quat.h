@@ -50,6 +50,9 @@
                                   versor dest);
    CGLM_INLINE void glm_quat_rotatev(versor q, vec3 v, vec3 dest);
    CGLM_INLINE void glm_quat_rotate(mat4 m, versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_rotate_at(mat4 m, versor q, vec3 pivot)
+   CGLM_INLINE void glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot)
+   CGLM_INLINE void glm_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest)
    CGLM_INLINE void glm_quat_make(float * restrict src, versor dest);
  */
 
@@ -931,6 +934,26 @@ glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
   glm_translate_make(m, pivot);
   glm_quat_rotate(m, q, m);
   glm_translate(m, pivotInv);
+}
+
+/*!
+ * @brief rotate vector using quaternion at pivot point
+ *
+ * @param[in]   q     quaternion
+ * @param[in]   v     vector to rotate
+ * @param[in]   pivot pivot
+ * @param[out]  dest  rotated vector
+ */
+CGLM_INLINE
+void
+glm_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest) {
+  CGLM_ALIGN(8) vec3 vRel, rotatedRel, dest;
+
+  glm_vec3_sub(v, pivot, vRel);
+  glm_quat_rotatev(q, vRel, rotatedRel);
+  glm_vec3_add(rotatedRel, pivot, dest);
+  
+  return dest;
 }
 
 /*!

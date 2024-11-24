@@ -167,6 +167,10 @@ glmc_quat_rotate_atm(mat4 m, versor q, vec3 pivot);
 
 CGLM_EXPORT
 void
+glmc_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest);
+
+CGLM_EXPORT
+void
 glmc_quat_make(const float * __restrict src, versor dest);
 
 #ifdef __cplusplus
