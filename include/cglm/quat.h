@@ -53,6 +53,7 @@
    CGLM_INLINE void glm_quat_rotate_at(mat4 m, versor q, vec3 pivot)
    CGLM_INLINE void glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot)
    CGLM_INLINE void glm_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest)
+   CGLM_INLINE bool glm_quat_eqv(versor p, versor, q);
    CGLM_INLINE void glm_quat_make(float * restrict src, versor dest);
  */
 
@@ -939,10 +940,10 @@ glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
 /*!
  * @brief rotate vector using quaternion at pivot point
  *
- * @param[in]   q     quaternion
- * @param[in]   v     vector to rotate
- * @param[in]   pivot pivot
- * @param[out]  dest  rotated vector
+ * @param[in]  q     quaternion
+ * @param[in]  v     vector to rotate
+ * @param[in]  pivot pivot
+ * @param[out] dest  rotated vector
  */
 CGLM_INLINE
 void
@@ -954,6 +955,19 @@ glm_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest) {
   glm_vec3_add(rotatedRel, pivot, dest);
   
   return dest;
+}
+
+/*!
+ * @brief check if quaternion is equal to another (without epsilon) quaternion
+ *
+ * @param[in]  p  first quaternion
+ * @param[in]  q  second quaternion
+ * 
+ */
+CGLM_INLINE
+bool
+glm_quat_eqv(versor p, versor q) {
+  return glm_vec4_eqv(p, q);
 }
 
 /*!

@@ -243,6 +243,12 @@ glmc_quat_rotate_atv(versor q, vec3 v, vec3 pivot, vec3 dest) {
 }
 
 CGLM_EXPORT
+bool
+glmc_quat_eqv(versor p, versor q) {
+  return glm_vec4_eqv(p, q);
+}
+
+CGLM_EXPORT
 void
 glmc_quat_make(const float * __restrict src, versor dest) {
   glm_quat_make(src, dest);

@@ -595,10 +595,23 @@ glms_quat_(rotate_atm)(versors q, vec3s pivot) {
  */
 CGLM_INLINE
 vec3s
-glms_quat_(rotate_atv)(versor q, vec3 v, vec3 pivot) {
+glms_quat_(rotate_atv)(versors q, vec3s v, vec3s pivot) {
   vec3s dest;
-  glm_quat_rotate_atv(q, v, pivot, dest.raw);
+  glm_quat_rotate_atv(q.raw, v.raw, pivot.raw, dest.raw);
   return dest;
+}
+
+/*!
+ * @brief check if quaternion is equal to another (without epsilon) quaternion
+ *
+ * @param[in]  p  first quaternion
+ * @param[in]  q  second quaternion
+ * 
+ */
+CGLM_INLINE
+bool
+glms_quat_(eqv)(versors p, versors q) {
+  return glm_vec4_eqv(p.raw, q.raw);
 }
 
 /*!
